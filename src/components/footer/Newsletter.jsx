@@ -75,10 +75,12 @@ const Newsletter = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          className="px-8 py-4 relative group overflow-hidden transition-colors rounded-full text-xl"
         >
           SUBMIT
+          <span className="absolute left-0 bottom-0 w-full h-px bg-current transition-all duration-800 opacity-100 group-hover:opacity-0 group-hover:translate-x-1"></span>
         </button>
+       
       </form>
       <div>
         <h3 className="text-xl font-bold mb-4">Explore</h3>
@@ -87,7 +89,7 @@ const Newsletter = () => {
             <Link
               key={index}
               href={link.url}
-              className="text-gray-700 hover:text-black transition-colors"
+              className=" hover:text-black transition-colors"
             >
               {link.text}
             </Link>
@@ -102,7 +104,7 @@ const Newsletter = () => {
             <Link
               key={index}
               href={link.url}
-              className="text-gray-700 hover:text-black transition-colors"
+              className=" hover:text-black transition-colors"
             >
               {link.text}
             </Link>

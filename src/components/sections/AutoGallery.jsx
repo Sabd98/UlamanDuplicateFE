@@ -1,69 +1,29 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import axios from "axios";
 
-export const galleryItems = [
-  {
-    id: 1,
-    title: "Pro-wedding venue",
-    images: [
-      "/AutoGallery_1.avif",
-      "/AutoGallery_1_1.avif",
-      "/AutoGallery_1_2.avif",
-    ],
-  },
-  {
-    id: 2,
-    title: "Rovers and Chocolates",
-    images: [
-      "/AutoGallery_2.avif",
-      "/AutoGallery_2_1.avif",
-      "/AutoGallery_2_2.avif",
-    ],
-  },
-  {
-    id: 3,
-    title: "Professional Retreats",
-    images: [
-      "/AutoGallery_3.avif",
-      "/AutoGallery_3_1.avif",
-      "/AutoGallery_3_2.avif",
-    ],
-  },
-  {
-    id: 4,
-    title: "Pro-wedding venue",
-    images: [
-      "/AutoGallery_1.avif",
-      "/AutoGallery_1_1.avif",
-      "/AutoGallery_1_2.avif",
-    ],
-  },
-  {
-    id: 5,
-    title: "Rovers and Chocolates",
-    images: [
-      "/AutoGallery_2.avif",
-      "/AutoGallery_2_1.avif",
-      "/AutoGallery_2_2.avif",
-    ],
-  },
-  {
-    id: 6,
-    title: "Professional Retreats",
-    images: [
-      "/AutoGallery_3.avif",
-      "/AutoGallery_3_1.avif",
-      "/AutoGallery_3_2.avif",
-    ],
-  },
-];
 
 const AutoGallery = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(
-    galleryItems.map(() => 0)
-  );
+ 
+  const [galleryItems, setGalleryItems] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("/api/galleryItems.json"); // Path to your JSON file
+      setGalleryItems(response.data.galleryItems||[]);
+      setCurrentImageIndex(
+        Array(response.data.galleryItems?.length || 0).fill(0)
+      );
+    };
+
+    fetchData();
+  }, []);
+
+ 
 
   useEffect(() => {
+    if (!galleryItems.length) return;
+
     const intervals = galleryItems.map((item, galleryIndex) => {
       return setInterval(() => {
         setCurrentImageIndex((prev) =>
@@ -94,6 +54,14 @@ const AutoGallery = () => {
     return patterns[index] || { height: "h-[30rem]" };
   };
 
+  if (!galleryItems.length) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p>No gallery items found</p>
+      </div>
+    );
+  }
+
   // Group items into rows
   const rows = [];
   const itemsPerRow = 3;
@@ -106,7 +74,8 @@ const AutoGallery = () => {
       <div className="mx-auto max-w-7xl ">
         {/* Custom masonry layout using grid rows */}
         <div className="flex flex-col gap-4">
-          {rows.map((row, rowIndex) => (
+{          console.log('rows:',rows)
+}          {rows.map((row, rowIndex) => (
             <div
               key={rowIndex}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1"
@@ -128,7 +97,7 @@ const AutoGallery = () => {
                       className={`${dimensions.height} rounded-md overflow-hidden shadow-2xl bg-white`}
                     >
                       <div className="w-full ">
-                        {gallery.images.map((image, imgIndex) => (
+                        {gallery?.images?.map((image, imgIndex) => (
                           <motion.div
                             key={image}
                             className="absolute inset-0 w-full"

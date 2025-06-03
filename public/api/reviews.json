@@ -1,0 +1,18 @@
+{
+    "reviews":[
+      {
+        "id": 1,
+        "name": "Conny H",
+        "date": "Apr 2023",
+        "title": "”Perfect Place To Relax And Heal!”",
+        "content": "Loved this place so much, I extended and stayed over a week. This place is perfect to relax & heal! The resort is so beautiful, peaceful, quiet and embedded into the nature. The food is delicious and the staff does an excellent service. The healing & wellness options made it special: the spa was relaxing and I did yoga every day..."
+      },
+      {
+        "id": 2,
+        "name": "Janey V",
+        "date": "Jan 2024",
+        "title":"”One Of The Most Beautiful Resorts In The World.”",
+        "content": "Ulaman eco-resort is, without doubt, one of the most beautiful resorts I have stayed at. Just returned from an amazing 4 day stay on my own on a yoga wellness and healing experience. I cannot begin to describe how rested and rejuvenated I feel. Everything at this super beautiful resort..."
+      }
+    ]
+}

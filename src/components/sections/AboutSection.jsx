@@ -1,44 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import axios from "axios";
 
-const CarouselSection = () => {
+const AboutSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [aboutData, setAboutData] = useState([]);
 
-  const carouselData = [
-    {
-      title:
-        " An award-winning eco-luxury resort offering a unique hideaway experience. Embrace authenticity, balance, and harmony with nature in a healing, luxurious environment.",
-      description:
-        "We believe nature and luxury can coexist. Ulaman Eco Luxury Resort offers a secluded, lush haven with luxurious amenities and impeccable service. Immerse yourself in traditional Balinese culture and leave feeling renewed, all while minimizing your ecologic",
-      image: "/carousel_section1_1.avif",
-    },
-    {
-      title: "B award-winning eco-luxury resort",
-      description:
-        "B a unique hideaway experience. Embrace authenticity, balance, and harmony with nature in a healing, luxurious environment.",
-      text: "We believe nature and luxury can coexist. Ulaman Eco Luxury Resort offers a secluded, lush haven with luxurious amenities and impeccable service. Immerse yourself in traditional Balinese culture and leave feeling renewed, all while minimizing your ecological footprint. Recharge your mind, body, and soul in this unique holistic retreat.",
-      image: "/carousel_section1_2.avif",
-    },
-    {
-      title: "C award-winning eco-luxury resort",
-      description:
-        "C a unique hideaway experience. Embrace authenticity, balance, and harmony with nature in a healing, luxurious environment.",
-      text: "We believe nature and luxury can coexist. Ulaman Eco Luxury Resort offers a secluded, lush haven with luxurious amenities and impeccable service. Immerse yourself in traditional Balinese culture and leave feeling renewed, all while minimizing your ecological footprint. Recharge your mind, body, and soul in this unique holistic retreat.",
-      image: "/carousel_section1_3.avif",
-    },
-    // Add more carousel items as needed
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("/api/aboutData.json"); // Path to your JSON file
+      setAboutData(response.data.aboutData);
+    };
 
+    fetchData();
+  }, []);
   const nextSlide = () => {
     setCurrentIndex((prev) =>
-      prev === carouselData.length - 1 ? 0 : prev + 1
+      prev === aboutData.length - 1 ? 0 : prev + 1
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prev) =>
-      prev === 0 ? carouselData.length - 1 : prev - 1
+      prev === 0 ? aboutData.length - 1 : prev - 1
     );
   };
 
@@ -46,7 +31,7 @@ const CarouselSection = () => {
     <div className="py-20 ">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Carousel */}
+          {/* About */}
           <div className="relative h-[500px] w-[30rem] overflow-hidden rounded-tl-xl rounded-br-xl shadow-xl">
             <AnimatePresence mode="wait">
               <motion.div
@@ -60,7 +45,7 @@ const CarouselSection = () => {
                 <div
                   className={`shadow-2xl w-full h-full`}
                   style={{
-                    backgroundImage: `url(${carouselData[currentIndex].image})`,
+                    backgroundImage: `url(${aboutData[currentIndex]?.image})`,
                   }}
                 />
               </motion.div>
@@ -84,7 +69,7 @@ const CarouselSection = () => {
 
             {/* Indicators */}
             <div className="absolute  bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-              {carouselData.map((_, index) => (
+              {aboutData.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
@@ -102,10 +87,10 @@ const CarouselSection = () => {
           {/* Description */}
           <div>
             <h2 className="text-3xl md:text-4xl font-serif mb-4">
-              {carouselData[currentIndex].title}
+              {aboutData[currentIndex]?.title}
             </h2>
             <p className="text-lg text-gray-600 mb-6">
-              {carouselData[currentIndex].description}
+              {aboutData[currentIndex]?.description}
             </p>
 
             <a
@@ -124,4 +109,4 @@ const CarouselSection = () => {
   );
 };
 
-export default CarouselSection;
+export default AboutSection;

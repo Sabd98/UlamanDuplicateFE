@@ -1,0 +1,21 @@
+{
+  "aboutData": [
+    {
+      "title": " An award-winning eco-luxury resort offering a unique hideaway experience. Embrace authenticity, balance, and harmony with nature in a healing, luxurious environment.",
+      "description": "We believe nature and luxury can coexist. Ulaman Eco Luxury Resort offers a secluded, lush haven with luxurious amenities and impeccable service. Immerse yourself in traditional Balinese culture and leave feeling renewed, all while minimizing your ecologic",
+      "image": "/carousel_section1_1.avif"
+    },
+    {
+      "title": "B award-winning eco-luxury resort",
+      "description": "B a unique hideaway experience. Embrace authenticity, balance, and harmony with nature in a healing, luxurious environment.",
+      "text": "We believe nature and luxury can coexist. Ulaman Eco Luxury Resort offers a secluded, lush haven with luxurious amenities and impeccable service. Immerse yourself in traditional Balinese culture and leave feeling renewed, all while minimizing your ecological footprint. Recharge your mind, body, and soul in this unique holistic retreat.",
+      "image": "/carousel_section1_2.avif"
+    },
+    {
+      "title": "C award-winning eco-luxury resort",
+      "description": "C a unique hideaway experience. Embrace authenticity, balance, and harmony with nature in a healing, luxurious environment.",
+      "text": "We believe nature and luxury can coexist. Ulaman Eco Luxury Resort offers a secluded, lush haven with luxurious amenities and impeccable service. Immerse yourself in traditional Balinese culture and leave feeling renewed, all while minimizing your ecological footprint. Recharge your mind, body, and soul in this unique holistic retreat.",
+      "image": "/carousel_section1_3.avif"
+    }
+  ]
+}

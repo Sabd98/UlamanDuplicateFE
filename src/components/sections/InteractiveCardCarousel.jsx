@@ -1,14 +1,24 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { villas } from "@/utils/villasData";
+import axios from "axios";
 
 const InteractiveCardCarousel = () => {
   const [activeCard, setActiveCard] = useState(0);
   const [carouselStates, setCarouselStates] = useState({});
   const containerRef = useRef(null);
   const touchStartX = useRef(0);
+  const [villas, setVillas] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("/api/villasData.json"); // Path to your JSON file
+      setVillas(response.data.villas);
+    };
+
+    fetchData();
+  }, []);
+  
   // Initialize carousel states
   useEffect(() => {
     const initialState = {};

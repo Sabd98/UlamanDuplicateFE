@@ -1,11 +1,13 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PackageModal from "../modals/PackageModal";
+import { motion } from "framer-motion";
 
 const FooterCredits = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
 
+   
   const packages = [
     {
       id: 1,
@@ -47,41 +49,60 @@ const FooterCredits = () => {
     },
   ];
 
+  const duplicatedSlides = [...packages, ...packages];
+
+
   const openPackageModal = (pkg) => {
     setSelectedPackage(pkg);
     setIsModalOpen(true);
   };
 
+
+
   return (
-    <div>
+    <div className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <ul className="gap-x-10 text-md flex w-[90vw]">
-            <li className="font-bold mb-2">Terms</li>
+        <div className="md:col-span-3">
+          {/* Top links section */}
+          <ul className="flex flex-wrap gap-x-16 gap-y-2 text-sm mb-6">
+            <li className="font-bold">Terms</li>
             <li>
               <Link className="hover:underline" href="/privacy">
                 Privacy
               </Link>
             </li>
             <li>Kids under 6 are not advised.</li>
-            <li>
+            <li >
               © 2024-2025 Two Moves Studio for ulaman.com. All Rights Reserved
             </li>
             <li>Made With ♥ By Two Moves Studio</li>
           </ul>
-          <div>
-            <ul className="gap-x-5 text-sm flex w-[80rem]">
-              {packages.map((pkg) => (
-                <li key={pkg.id}>
+
+          {/* Infinite carousel section */}
+          <div className="w-full bg-light-background overflow-hidden">
+            <motion.div
+              className="flex py-4"
+              animate={{
+                x: ["0%", "-100%"],
+                transition: {
+                  ease: "linear",
+                  duration: 20,
+                  repeat: Infinity,
+                },
+              }}
+            >
+              {duplicatedSlides.map((pkg, i) => (
+                <div key={i} className="flex-shrink-0 mx-6 flex items-center">
                   <button
                     onClick={() => openPackageModal(pkg)}
-                    className="text-left hover:underline"
+                    className="text-nowrap hover:underline text-gray-500"
                   >
-                    {pkg.title} | {pkg.duration}
+                    <span className="font-medium">{pkg.title}</span> |{" "}
+                    {pkg.duration}
                   </button>
-                </li>
+                </div>
               ))}
-            </ul>
+            </motion.div>
           </div>
         </div>
       </div>

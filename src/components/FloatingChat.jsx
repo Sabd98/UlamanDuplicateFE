@@ -7,7 +7,7 @@ const FloatingChat = ({ onClick }) => {
 
   return (
     <motion.button
-      className="fixed bottom-6 right-6 bg-black text-white p-4 rounded-full shadow-lg z-40 flex items-center"
+      className="fixed bottom-6 right-6 bg-amber-700/50 p-4 rounded-full shadow-lg z-40 flex items-center"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={onClick}

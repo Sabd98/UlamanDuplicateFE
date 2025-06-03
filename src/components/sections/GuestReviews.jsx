@@ -1,30 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import axios from "axios";
 
 const GuestReviews = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const timerRef = useRef(null);
+  const [reviews, setReviews] = useState([]);
 
-  const reviews = [
-    {
-      id: 1,
-      name: "Conny H",
-      date: "Apr 2023",
-      title: `"Perfect Place To Relax And Heal!"`,
-      content:
-        "Loved this place so much, I extended and stayed over a week. This place is perfect to relax & heal! The resort is so beautiful, peaceful, quiet and embedded into the nature. The food is delicious and the staff does an excellent service. The healing & wellness options made it special: the spa was relaxing and I did yoga every day...",
-    },
-    {
-      id: 2,
-      name: "Janey V",
-      date: "Jan 2024",
-      title: `“One Of The Most Beautiful Resorts In The World.”`,
-      content:
-        "Ulaman eco-resort is, without doubt, one of the most beautiful resorts I have stayed at. Just returned from an amazing 4 day stay on my own on a yoga wellness and healing experience. I cannot begin to describe how rested and rejuvenated I feel. Everything at this super beautiful resort..."
-    },
-    // Add more reviews
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("/api/reviews.json"); // Path to your JSON file
+      setReviews(response.data.reviews);
+    };
+
+    fetchData();
+  }, []);
 
   const nextReview = () => {
     setActiveIndex((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
@@ -55,13 +46,13 @@ const GuestReviews = () => {
 
           <div>
             <button
-              className=" transform -translate-y-1/2 -translate-x-4 shadow-lg rounded-full p-3 "
+              className="border shadow-lg rounded-lg p-3 hover:bg-gray-100  transform -translate-y-1/2 -translate-x-4"
               onClick={prevReview}
             >
               <FiChevronLeft className="text-xl" />
             </button>
             <button
-              className="transform -translate-y-1/2 translate-x-4 shadow-lg rounded-full p-3 "
+              className="border shadow-lg rounded-lg p-3 hover:bg-gray-100 transform -translate-y-1/2 translate-x-4  "
               onClick={nextReview}
             >
               <FiChevronRight className="text-xl" />
@@ -89,17 +80,17 @@ const GuestReviews = () => {
             <div className="flex text-[#617262]  gap-x-16 w-6xl justify-between mb-3">
               <div>
                 <h4 className="text-xl w-[10rem] font-bold">
-                  {reviews[activeIndex].name}
+                  {reviews[activeIndex]?.name}
                 </h4>
-                <p>{reviews[activeIndex].date}</p>
+                <p>{reviews[activeIndex]?.date}</p>
               </div>
               <div>
                 <h4 className="text-lg  w-[10rem] font-bold">
-                  {reviews[activeIndex].title}
+                  {reviews[activeIndex]?.title}
                 </h4>
               </div>
               <div>
-                <p className=" mb-6 ">{reviews[activeIndex].content}</p>
+                <p className=" mb-6 ">{reviews[activeIndex]?.content}</p>
               </div>
             </div>
           </motion.div>

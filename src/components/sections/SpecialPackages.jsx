@@ -1,51 +1,23 @@
-import { useState, useRef } from "react";
-import { motion, AnimatePresence, vh } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Image from "next/image";
+import axios from "axios";
 
 const SpecialPackages = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef(null);
+  const [packages, setPackages] = useState([]);
 
-  const packages = [
-    {
-      id: 1,
-      title: "The Lovers Getaway",
-      description:
-        "Romantic escape for couples with private dinners and spa treatments",
-      price: 1890000,
-      image: "/package_section_1_1.avif",
-    },
-    {
-      id: 2,
-      title: "The wonders of wellness",
-      description: "Holistic healing program with yoga, meditation, and detox",
-      price: 2100000,
-      image: "/package_section_1_2.avif",
-    },
-    {
-      id: 3,
-      title: "The Avatar Experience",
-      description: "Immersive nature adventure inspired by the Avatar universe",
-      price: 2450000,
-      image: "/package_section_1_3.avif",
-    },
-    {
-      id: 4,
-      title: "The Ultimate Honeymoon",
-      description:
-        "Luxurious honeymoon package with private villa and excursions",
-      price: 3200000,
-      image: "/package_section_1_2.avif",
-    },
-    {
-      id: 5,
-      title: "The Avatar Experience",
-      description: "Immersive nature adventure inspired by the Avatar universe",
-      price: 2450000,
-      image: "/package_section_1_3.avif",
-    },
-  ];
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        const response = await axios.get("/api/packages.json"); // Path to your JSON file
+        setPackages(response.data.packages);
+      };
+  
+      fetchData();
+    }, []);
 
   const   handleCardChange = (direction) => {
     setActiveIndex((prev) => {

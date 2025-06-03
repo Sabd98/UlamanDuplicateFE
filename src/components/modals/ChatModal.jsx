@@ -143,7 +143,7 @@ const ChatModal = ({ isOpen, onClose }) => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/10 z-50 flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -156,7 +156,7 @@ const ChatModal = ({ isOpen, onClose }) => {
             transition={{ type: "spring", damping: 25 }}
           >
             {/* Header */}
-            <div className="bg-gray-900 text-white p-4 flex justify-between items-center">
+            <div className="bg-slate-300 text-black p-4 flex justify-between items-center">
               <div>
                 <h3 className="text-xl font-bold">Diamond Reconversions</h3>
                 <p className="text-sm opacity-80">Start a conversation</p>
@@ -178,7 +178,7 @@ const ChatModal = ({ isOpen, onClose }) => {
                 <p className="text-center mb-6">Check your favorite channel</p>
                 <button
                   onClick={handleStartChat}
-                  className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
+                  className="w-full bg-slate-300 text-black py-3 rounded-lg hover:bg-gray-800 transition-colors"
                 >
                   Start Chat
                 </button>
@@ -268,7 +268,7 @@ const ChatModal = ({ isOpen, onClose }) => {
                   <div className="mt-auto">
                     <button
                       type="submit"
-                      className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
+                      className="w-full bg-slate-700  py-3 rounded-lg hover:bg-gray-800 transition-colors"
                     >
                       Start Chat
                     </button>
@@ -359,7 +359,7 @@ const ChatModal = ({ isOpen, onClose }) => {
                     <button
                       onClick={handleSendMessage}
                       disabled={message.trim() === ""}
-                      className={`bg-blue-500 text-white p-3 rounded-r-lg ${
+                      className={`bg-blue-500text-black p-3 rounded-r-lg ${
                         message.trim() === ""
                           ? "opacity-50"
                           : "hover:bg-blue-600"
@@ -402,7 +402,7 @@ const ChatModal = ({ isOpen, onClose }) => {
 
                   <button
                     onClick={handleWhatsappRedirect}
-                    className="w-full flex items-center justify-center bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors"
+                    className="w-full flex items-center justify-center bg-green-600text-black py-3 rounded-lg hover:bg-green-700 transition-colors"
                   >
                     <FaWhatsapp className="mr-2 text-xl" />
                     WhatsApp

@@ -1,0 +1,58 @@
+{
+    "galleryItems":[
+      {
+        "id": 1,
+        "title": "Pro-wedding venue",
+        "images": [
+          "/AutoGallery_1.avif",
+          "/AutoGallery_1_1.avif",
+          "/AutoGallery_1_2.avif"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Rovers and Chocolates",
+        "images": [
+          "/AutoGallery_2.avif",
+          "/AutoGallery_2_1.avif",
+          "/AutoGallery_2_2.avif"
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Professional Retreats",
+        "images": [
+          "/AutoGallery_3.avif",
+          "/AutoGallery_3_1.avif",
+          "/AutoGallery_3_2.avif"
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Pro-wedding venue",
+        "images": [
+          "/AutoGallery_1.avif",
+          "/AutoGallery_1_1.avif",
+          "/AutoGallery_1_2.avif"
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Rovers and Chocolates",
+        "images": [
+          "/AutoGallery_2.avif",
+          "/AutoGallery_2_1.avif",
+          "/AutoGallery_2_2.avif"
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Professional Retreats",
+        "images": [
+          "/AutoGallery_3.avif",
+          "/AutoGallery_3_1.avif",
+          "/AutoGallery_3_2.avif"
+        ]
+      }
+    ]
+}

@@ -52,8 +52,6 @@ const WellnessSection = () => {
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 33vw"
-            placeholder="blur"
-            blurDataURL="/placeholder.jpg"
           />
         </div>
       </motion.div>
@@ -75,8 +73,6 @@ const WellnessSection = () => {
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 33vw"
-            placeholder="blur"
-            blurDataURL="/placeholder.jpg"
           />
         </div>
       </motion.div>
@@ -109,12 +105,11 @@ const WellnessSection = () => {
             </p>
           </div>
 
-          <button className="px-8 py-4 transition-colors rounded-full text-xl inline-flex items-center group shadow-lg hover:shadow-xl">
+          <button className="px-8 py-4 relative group overflow-hidden transition-colors rounded-full text-xl">
             LEARN MORE
-            <span className="ml-3 group-hover:translate-x-2 transition-transform">
-              →
-            </span>
+            <span className="absolute left-0 bottom-0 w-full h-px bg-current transition-all duration-800 opacity-100 group-hover:opacity-0 group-hover:translate-x-1"></span>
           </button>
+          
         </div>
       </motion.div>
     </div>

@@ -1,0 +1,94 @@
+{
+  "navLinks": [
+    {
+      "id": 1,
+      "text": "Villas",
+      "url": "/villas"
+    },
+    {
+      "id": 2,
+      "text": "Spa",
+      "url": "/spa"
+    },
+    {
+      "id": 3,
+      "text": "Dine",
+      "url": "/dine"
+    },
+    {
+      "id": 4,
+      "text": "Retreats",
+      "url": "/retreats"
+    }
+  ],
+  "sideMenuSections": [
+    {
+      "links": [
+        {
+          "text": "Home",
+          "url": "/",
+          "image": "/Zjeq0EMTzAJOCirD_hotel.avif"
+        },
+        {
+          "text": "Villas",
+          "url": "/villas",
+          "image": "/interactive_section_3_2.avif"
+        },
+        {
+          "text": "Packages",
+          "url": "/packages",
+          "image": "/roundopen_bg.avif"
+        },
+        {
+          "text": "Spa",
+          "url": "/spa",
+          "image": "/spa.avif"
+        },
+        {
+          "text": "Retreats",
+          "url": "/retreats",
+          "image": "/retreats.avif"
+        },
+        {
+          "text": "Dine",
+          "url": "/dine",
+          "image": "/dine.avif"
+        },
+        {
+          "text": "Experiences",
+          "url": "/experiences",
+          "image": "/experiences.avif"
+        }
+      ]
+    },
+    {
+      "links": [
+        {
+          "text": "Facilities",
+          "url": "/facilities",
+          "image": "/facilities.avif"
+        },
+        {
+          "text": "Blog",
+          "url": "/blog",
+          "image": "/blog.avif"
+        },
+        {
+          "text": "Reviews",
+          "url": "/reviews",
+          "image": "/reviews.avif"
+        },
+        {
+          "text": "About Contact",
+          "url": "/about-contact",
+          "image": "/about.avif"
+        },
+        {
+          "text": "The Map",
+          "url": "/map",
+          "image": "/map.avif"
+        }
+      ]
+    }
+  ]
+}

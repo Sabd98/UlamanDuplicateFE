@@ -7,7 +7,7 @@ const LocationInfo = () => {
         <h1 className="text-xl md:text-3xl font-serif mb-6">
           Tucked Within Majestic Balinese Nature.
         </h1>
-        <p className="mb-8 text-teal-900 text-sm line-clamp-3">
+        <p className="mb-8 text-sm line-clamp-3">
           Strategically located near popular areas like Canggu and Ubud,
           experience tranquil nature and luxury. With endless activities, you'll
           never want to leave Ulaman.

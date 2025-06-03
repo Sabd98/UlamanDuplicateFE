@@ -19,8 +19,7 @@ const MapSection = () => {
           fill
           className="object-cover rounded-xl"
           sizes="(max-width: 768px) 100vw, 50vw"
-          placeholder="blur"
-          blurDataURL="/placeholder.jpg"
+        
         />
       </div>
 

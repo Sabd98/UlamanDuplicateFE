@@ -1,11 +1,21 @@
 import { useState, useEffect } from "react";
-import { navLinks } from "@/utils/navigationData";
 import Image from "next/image";
 import { HiMenu } from "react-icons/hi";
+import axios from "axios";
 
 export const Header = ({ isMenuOpen, toggleMenu,onOpenBooking }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [navMenuData, setNavMenuData] = useState([]);
 
+  // Fetch navigation data
+  useEffect(() => {
+    const fetchData = async () => {
+        const response = await axios.get("/api/navigationData.json"); // Path to your JSON file
+        setNavMenuData(response.data.navLinks);
+    };
+
+    fetchData();
+  }, []);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -39,7 +49,7 @@ export const Header = ({ isMenuOpen, toggleMenu,onOpenBooking }) => {
             <HiMenu />
           </button>
           <div className="flex gap-4">
-            {navLinks.map((link) => (
+            {navMenuData.map((link) => (
               <a
                 key={link.id}
                 href={link.url}

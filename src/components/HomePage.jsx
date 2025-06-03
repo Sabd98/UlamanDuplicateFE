@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { Header } from "./sections/Header";
 import { HeroVideo } from "./sections/HeroVideo";
-import { SideMenu } from "./sections/SideMenu";
+import { SideMenu } from "./modals/SideMenu";
 import TextRevealSection from "./sections/TextRevealSection";
-import CarouselSection from "./sections/CarouselListSection";
+import AboutSection from "./sections/AboutSection";
 import InteractiveCardCarousel from "./sections/InteractiveCardCarousel";
 import HalfRoundReveal from "./sections/HalfRoundReveal";
 import SpecialPackages from "./sections/SpecialPackages";
@@ -17,6 +17,7 @@ import WeeklySchedule from "./sections/WeeklySchedule";
 import Footer from "./footer/Footer";
 import BookingModal from "./modals/BookingModal";
 import ChatModal from "./modals/ChatModal";
+import FloatingChat from "./FloatingChat";
 
 export const HomePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,7 +35,7 @@ export const HomePage = () => {
       <SideMenu isOpen={isMenuOpen} closeMenu={() => setIsMenuOpen(false)} />
       <HeroVideo onOpenChat={() => setIsChatOpen(true)} />
       <TextRevealSection />
-      <CarouselSection />
+      <AboutSection />
       <InteractiveCardCarousel />
       <HalfRoundReveal />
       <SpecialPackages />
@@ -45,20 +46,12 @@ export const HomePage = () => {
       <WeeklySchedule />
       <AutoGallery />
       <Footer />
-
+      <FloatingChat onClick={() => setIsChatOpen(true)} />
       <BookingModal
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
       />
       <ChatModal isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
-      {/* <FloatingChat />
-
-      {activeIllustration && (
-        <IllustrationViewer
-          illustration={activeIllustration}
-          onClose={() => setActiveIllustration(null)}
-        />
-      )} */}
     </div>
   );
 };
