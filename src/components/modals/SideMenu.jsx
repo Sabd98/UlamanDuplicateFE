@@ -1,29 +1,17 @@
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useFetch } from "../../../hooks/useFetch";
 
 export const SideMenu = ({ isOpen, closeMenu }) => {
   const [currentImage, setCurrentImage] = useState("");
-  const [sideMenuData, setSideMenuData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const apiUrl = "/api/navigationData.json";
+  const { fetchedData, loading, error } = useFetch(apiUrl);
+  const sideMenuData = fetchedData?.sideMenuSections;
   // Fetch navigation data
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get("/api/navigationData.json"); // Path to your JSON file
-        setSideMenuData(response.data.sideMenuSections);
-
-        // Set initial image
-        if (response.data.sideMenuSections.length > 0) {
-          setCurrentImage(response.data.sideMenuSections[0].links[0].image);
-        }
-      } catch (err) {
-        setError("Failed to load navigation data");
-        console.error(err);
-      } finally {
-        setLoading(false);
+      if (sideMenuData?.length > 0) {
+        setCurrentImage(sideMenuData[0]?.links[0].image);
       }
     };
 

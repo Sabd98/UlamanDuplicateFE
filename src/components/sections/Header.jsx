@@ -1,21 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { HiMenu } from "react-icons/hi";
-import axios from "axios";
+import { useFetch } from "../../../hooks/useFetch";
 
 export const Header = ({ isMenuOpen, toggleMenu,onOpenBooking }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [navMenuData, setNavMenuData] = useState([]);
+  const apiUrl = "/api/navigationData.json";
+  const { fetchedData, loading } = useFetch(apiUrl);
+  const navMenuData = fetchedData?.navLinks;
 
-  // Fetch navigation data
-  useEffect(() => {
-    const fetchData = async () => {
-        const response = await axios.get("/api/navigationData.json"); // Path to your JSON file
-        setNavMenuData(response.data.navLinks);
-    };
-
-    fetchData();
-  }, []);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -48,8 +41,8 @@ export const Header = ({ isMenuOpen, toggleMenu,onOpenBooking }) => {
           >
             <HiMenu />
           </button>
-          <div className="flex gap-4">
-            {navMenuData.map((link) => (
+          {!loading &&<div className="flex gap-4">
+            {navMenuData?.map((link) => (
               <a
                 key={link.id}
                 href={link.url}
@@ -62,7 +55,7 @@ export const Header = ({ isMenuOpen, toggleMenu,onOpenBooking }) => {
                 {link.text}
               </a>
             ))}
-          </div>
+          </div>}
         </nav>
 
         <div

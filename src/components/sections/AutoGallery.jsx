@@ -1,28 +1,23 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import axios from "axios";
-
+import { useFetch } from "../../../hooks/useFetch";
 
 const AutoGallery = () => {
- 
-  const [galleryItems, setGalleryItems] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState([]);
+  const apiUrl = "/api/galleryItems.json";
+  const { fetchedData } = useFetch(apiUrl);
+  const galleryItems = fetchedData?.galleryItems || [];
+
+  // Initialize currentImageIndex when galleryItems are available
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("/api/galleryItems.json"); // Path to your JSON file
-      setGalleryItems(response.data.galleryItems||[]);
-      setCurrentImageIndex(
-        Array(response.data.galleryItems?.length || 0).fill(0)
-      );
-    };
+    if (galleryItems.length > 0 && currentImageIndex.length === 0) {
+      setCurrentImageIndex(Array(galleryItems.length).fill(0));
+    }
+  }, [galleryItems]);
 
-    fetchData();
-  }, []);
-
- 
-
+  // Set up intervals for image transitions
   useEffect(() => {
-    if (!galleryItems.length) return;
+    if (!galleryItems.length || currentImageIndex.length === 0) return;
 
     const intervals = galleryItems.map((item, galleryIndex) => {
       return setInterval(() => {
@@ -37,8 +32,8 @@ const AutoGallery = () => {
     });
 
     return () => intervals.forEach(clearInterval);
-  }, []);
-
+  }, [galleryItems]);
+  
   // Define the specific layout pattern for masonry grid
   const getCardDimensions = (index) => {
     const patterns = [
@@ -54,7 +49,7 @@ const AutoGallery = () => {
     return patterns[index] || { height: "h-[30rem]" };
   };
 
-  if (!galleryItems.length) {
+  if (!galleryItems?.length) {
     return (
       <div className="flex justify-center items-center h-64">
         <p>No gallery items found</p>
@@ -65,8 +60,8 @@ const AutoGallery = () => {
   // Group items into rows
   const rows = [];
   const itemsPerRow = 3;
-  for (let i = 0; i < galleryItems.length; i += itemsPerRow) {
-    rows.push(galleryItems.slice(i, i + itemsPerRow));
+  for (let i = 0; i < galleryItems?.length; i += itemsPerRow) {
+    rows.push(galleryItems?.slice(i, i + itemsPerRow));
   }
 
   return (
@@ -74,8 +69,7 @@ const AutoGallery = () => {
       <div className="mx-auto max-w-7xl ">
         {/* Custom masonry layout using grid rows */}
         <div className="flex flex-col gap-4">
-{          console.log('rows:',rows)
-}          {rows.map((row, rowIndex) => (
+          {rows.map((row, rowIndex) => (
             <div
               key={rowIndex}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1"
@@ -104,11 +98,11 @@ const AutoGallery = () => {
                             initial={{ opacity: 0 }}
                             animate={{
                               opacity:
-                                currentImageIndex[absoluteIndex] === imgIndex
+                                currentImageIndex?.[absoluteIndex] === imgIndex
                                   ? 1
                                   : 0,
                               zIndex:
-                                currentImageIndex[absoluteIndex] === imgIndex
+                                currentImageIndex?.[absoluteIndex] === imgIndex
                                   ? 10
                                   : 0,
                             }}

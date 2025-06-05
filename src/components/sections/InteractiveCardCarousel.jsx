@@ -1,28 +1,22 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import axios from "axios";
+import { useFetch } from "../../../hooks/useFetch";
 
 const InteractiveCardCarousel = () => {
   const [activeCard, setActiveCard] = useState(0);
   const [carouselStates, setCarouselStates] = useState({});
   const containerRef = useRef(null);
   const touchStartX = useRef(0);
-  const [villas, setVillas] = useState([]);
+  const apiUrl = "/api/villasData.json";
+  const { fetchedData,error } = useFetch(apiUrl);
+  const villas = fetchedData?.villas;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("/api/villasData.json"); // Path to your JSON file
-      setVillas(response.data.villas);
-    };
-
-    fetchData();
-  }, []);
   
   // Initialize carousel states
   useEffect(() => {
     const initialState = {};
-    villas.forEach((villa) => {
+    villas?.forEach((villa) => {
       initialState[villa.id] = 0;
     });
     setCarouselStates(initialState);
@@ -32,7 +26,7 @@ const InteractiveCardCarousel = () => {
     setActiveCard((prev) => {
       let nextIndex;
       if (direction === "next") {
-        nextIndex = prev < villas.length - 1 ? prev + 1 : prev;
+        nextIndex = prev < villas?.length - 1 ? prev + 1 : prev;
       } else {
         nextIndex = prev > 0 ? prev - 1 : prev;
       }
@@ -53,7 +47,7 @@ const InteractiveCardCarousel = () => {
   const handleImageChange = (villaId, direction) => {
     setCarouselStates((prev) => {
       const currentIndex = prev[villaId] || 0;
-      const imagesCount = villas.find((v) => v.id === villaId).images.length;
+      const imagesCount = villas?.find((v) => v.id === villaId).images.length;
       const newIndex =
         direction === "next"
           ? (currentIndex + 1) % imagesCount
@@ -94,7 +88,7 @@ const InteractiveCardCarousel = () => {
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
-            {villas.map((villa, index) => (
+            {villas?.map((villa, index) => (
               <div
                 key={villa.id}
                 className="flex-shrink-0 w-full md:w-3/5 lg:w-2/5 px-4 snap-start"
@@ -208,12 +202,12 @@ const InteractiveCardCarousel = () => {
             </button>
             <button
               className={`absolute -left-24 top-2/3 transform -translate-y-1/2 translate-x-4 border shadow-lg rounded-lg p-3 hover:bg-gray-100 ${
-                activeCard === villas.length - 1
+                activeCard === villas?.length - 1
                   ? "opacity-30 cursor-not-allowed"
                   : ""
               }`}
               onClick={() => handleCardChange("next")}
-              disabled={activeCard === villas.length - 1}
+              disabled={activeCard === villas?.length - 1}
             >
               <FiChevronRight className="text-xl" />
             </button>

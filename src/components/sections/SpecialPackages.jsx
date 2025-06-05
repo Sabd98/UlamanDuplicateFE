@@ -1,29 +1,21 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Image from "next/image";
-import axios from "axios";
+import { useFetch } from "../../../hooks/useFetch";
 
 const SpecialPackages = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef(null);
-  const [packages, setPackages] = useState([]);
+  const apiUrl = "/api/packages.json";
+  const { fetchedData, error } = useFetch(apiUrl);
+  const packages = fetchedData?.packages;
 
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        const response = await axios.get("/api/packages.json"); // Path to your JSON file
-        setPackages(response.data.packages);
-      };
-  
-      fetchData();
-    }, []);
-
-  const   handleCardChange = (direction) => {
+  const handleCardChange = useCallback((direction) => {
     setActiveIndex((prev) => {
       let nextIndex;
       if (direction === "next") {
-        nextIndex = prev < packages.length - 1 ? prev + 1 : prev;
+        nextIndex = prev < packages?.length - 1 ? prev + 1 : prev;
       } else {
         nextIndex = prev > 0 ? prev - 1 : prev;
       }
@@ -39,7 +31,13 @@ const SpecialPackages = () => {
 
       return nextIndex;
     });
-  };
+  }, []);
+
+  !!error && (
+    <div className="fixed inset-0 bg-light-background text-brand z-40 pt-20 flex items-center justify-center">
+      <p className="text-red-500">{error}</p>
+    </div>
+  );
   return (
     <div className="py-20">
       <div className="container mx-auto px-4">
@@ -54,7 +52,7 @@ const SpecialPackages = () => {
             className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
             style={{ scrollbarWidth: "none" }}
           >
-            {packages.map((pkg) => (
+            {packages?.map((pkg) => (
               <motion.div
                 key={pkg.id}
                 className="flex-shrink-0  w-full md:w-1/4 lg:w-1/3 px-4 snap-start"
@@ -107,12 +105,12 @@ const SpecialPackages = () => {
             </button>
             <button
               className={`absolute -left-24 top-2/3 transform -translate-y-1/2 translate-x-4 border shadow-lg rounded-lg p-3 hover:bg-gray-100 ${
-                activeIndex === packages.length - 1
+                activeIndex === packages?.length - 1
                   ? "opacity-30 cursor-not-allowed"
                   : ""
               }`}
               onClick={() => handleCardChange("next")}
-              disabled={activeIndex === packages.length - 1}
+              disabled={activeIndex === packages?.length - 1}
             >
               <FiChevronRight className="text-xl" />
             </button>
@@ -131,7 +129,6 @@ const SpecialPackages = () => {
             <FiChevronRight className="text-xl" />
           </button> */}
         </div>
-
       </div>
     </div>
   );

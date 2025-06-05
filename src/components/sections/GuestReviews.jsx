@@ -1,28 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import axios from "axios";
+import { useFetch } from "../../../hooks/useFetch";
 
 const GuestReviews = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const timerRef = useRef(null);
-  const [reviews, setReviews] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("/api/reviews.json"); // Path to your JSON file
-      setReviews(response.data.reviews);
-    };
-
-    fetchData();
-  }, []);
-
+  const apiUrl = "/api/reviews.json";
+  const { fetchedData, error } = useFetch(apiUrl);
+  const reviews = fetchedData?.reviews;
+ 
   const nextReview = () => {
-    setActiveIndex((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
+    setActiveIndex((prev) => (prev === reviews?.length - 1 ? 0 : prev + 1));
   };
 
   const prevReview = () => {
-    setActiveIndex((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
+    setActiveIndex((prev) => (prev === 0 ? reviews?.length - 1 : prev - 1));
   };
 
   // Auto-rotate reviews
@@ -80,17 +73,17 @@ const GuestReviews = () => {
             <div className="flex text-[#617262]  gap-x-16 w-6xl justify-between mb-3">
               <div>
                 <h4 className="text-xl w-[10rem] font-bold">
-                  {reviews[activeIndex]?.name}
+                  {reviews?.[activeIndex]?.name}
                 </h4>
-                <p>{reviews[activeIndex]?.date}</p>
+                <p>{reviews?.[activeIndex]?.date}</p>
               </div>
               <div>
                 <h4 className="text-lg  w-[10rem] font-bold">
-                  {reviews[activeIndex]?.title}
+                  {reviews?.[activeIndex]?.title}
                 </h4>
               </div>
               <div>
-                <p className=" mb-6 ">{reviews[activeIndex]?.content}</p>
+                <p className=" mb-6 ">{reviews?.[activeIndex]?.content}</p>
               </div>
             </div>
           </motion.div>

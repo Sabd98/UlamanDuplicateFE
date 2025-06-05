@@ -1,3 +1,12 @@
+Task Answers: 
+1. I place it to public in src directory, so it easy to called in NextJs. And make structure for every dummy data that i tried previously.
+2. I'll use express js, node js, and Mongo DB. Because this is the backend that suits in my experience in Fullstack Career right now.
+3. Pick a custom domain from vercel production
+4. I'll add user file from my collection then install jsonwebtoken for user auth and bcrypt as password. Make user middleware. 
+5. Caching and optimize images and videos.
+6. With validation from frontend and prepare it to backend. In my ORM (Sequelize) or api validation applicate.
+7. Lazy load and suspense i think.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
